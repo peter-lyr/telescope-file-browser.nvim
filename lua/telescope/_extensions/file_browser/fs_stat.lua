@@ -26,14 +26,14 @@ M.size = {
 
 local DATE_HL = "TelescopePreviewDate"
 M.date = {
-  width = 13,
-  right_justify = true,
+  width = 17,
+  right_justify = false,
   display = function(entry)
     local mtime = entry.stat.mtime.sec
     if YEAR ~= os.date("%Y", mtime) then
-      return { os.date("%b %d  %Y", mtime), DATE_HL }
+      return { os.date("%Y%m%d %H%M%S", mtime), DATE_HL }
     end
-    return { os.date("%b %d %H:%M", mtime), DATE_HL }
+    return { os.date("%Y%m%d %H%M%S", mtime), DATE_HL }
   end,
 }
 
@@ -65,7 +65,7 @@ local mode_type_map = {
 
 M.mode = {
   width = 10,
-  right_justify = true,
+  right_justify = false,
   display = function(entry)
     local owner, group, other = string.format("%3o", entry.stat.mode):match "(.)(.)(.)$"
     local stat = vim.tbl_flatten {
