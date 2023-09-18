@@ -550,14 +550,15 @@ fb_actions.open = function(prompt_bufnr)
     return
   end
 
-  local cmd = vim.fn.has "win32" == 1 and "start" or vim.fn.has "mac" == 1 and "open" or "xdg-open"
+  -- local cmd = vim.fn.has "win32" == 1 and "start" or vim.fn.has "mac" == 1 and "open" or "xdg-open"
   for _, selection in ipairs(selections) do
-    require("plenary.job")
-      :new({
-        command = cmd,
-        args = { selection:absolute() },
-      })
-      :start()
+    vim.fn.system('start ' .. selection:absolute())
+    -- require("plenary.job")
+    --   :new({
+    --     command = cmd,
+    --     args = { selection:absolute() },
+    --   })
+    --   :start()
   end
   actions.close(prompt_bufnr)
 end
